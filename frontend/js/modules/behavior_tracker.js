@@ -76,11 +76,11 @@ class BehaviorTracker {
       cooldownMs: 600000,
       lastHintTs: 0,
       messages: [
-        '已经有一会儿没有操作了，需要我给点思路吗？请告诉我你的疑惑',
-        '卡住了吗？要不要我给几个提示。请告诉你的问题吧',
-        '来问问我给你些指导，帮你重新进入状态？',
-        '看你有一会儿没操作了，遇到困难可以问问我哦',
-        '是有什么不理解的地方吗，告诉我问题，ai助教来助阵！'
+        "It's been a while since the last operation. Would you like me to give some ideas? Please tell me your questions.",
+        "Feeling stuck? Would you like me to provide some hints? Please tell me what you need help with.",
+        "How about asking me for some guidance to get back on track?",
+        "I noticed you haven't done anything for a while. Feel free to ask me if you encounter any difficulties!",
+        "Is there something you don't understand? Tell me the problem, and the AI assistant is here to help!"
       ]
     };
   }

@@ -1579,11 +1579,11 @@ function askAIAboutElement() {
 
     // 构建AI主动询问的消息（使用Markdown格式以便正确渲染）
     const tagNameDisplay = `\`<${selectedElementInfo.tagName.toLowerCase()}>\``;
-    const aiInitialMessage = `我看到您选中了一个 ${tagNameDisplay} 元素${selectedElementInfo.id ? ` (ID: \`#${selectedElementInfo.id}\`)` : ''}。
+    const aiInitialMessage = `I see you've selected a ${tagNameDisplay} element${selectedElementInfo.id ? ` (ID: \`#${selectedElementInfo.id}\`)` : ''}.
 
-**您想要了解这个HTML元素的功能和用法吗？** 我可以为您详细介绍它的作用、属性和使用场景。
+**Would you like to learn about the function and usage of this HTML element?** I can provide you with a detailed introduction to its purpose, attributes, and usage scenarios.
 
-💡 *提示：请在下方输入您想了解的内容，例如"这个元素有什么作用？"或"如何使用这个元素？"*`;
+💡 *Hint: Please enter what you would like to know below, such as "What is the purpose of this element?" or "How to use this element?"*`;
 
     console.log('构建的AI消息:', aiInitialMessage);
 

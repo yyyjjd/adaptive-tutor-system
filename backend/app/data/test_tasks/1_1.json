@@ -1,73 +1,73 @@
 {
-  "topic_id": "1_1",
-  "title": "1_1 使用h元素和p元素体验标题与段落",
-  "description_md": "# 任务描述：\n请使用 HTML 标签构建一个简单的页面结构，包括主标题、副标题和正文段落。目标是熟悉常用的结构性标签 `<h2>`、`<h4>` 和 `<p>` 的用法。\n\n## 要求：\n1. 使用 `<h2>` 元素创建一个主标题，内容为“前端开发入门指南”。\n2. 在主标题下方使用 `<h4>` 元素创建一个副标题，内容为“HTML基础结构”。\n3. 在副标题下方使用 `<p>` 元素创建一个段落，内容为“本文将介绍如何使用HTML构建网页的基本结构。”\n4. 保持标签层次清晰，不要额外添加无关内容。",
+  "topic_id": "1.1",
+  "title": "1.1 Using \"h\" and \"p\" elements for headings and paragraphs",
+  "description_md": "# Task Description:\nPlease use HTML tags to build a simple page structure, including a main heading, subheading, and body paragraphs. The goal is to become familiar with the usage of common structural tags `<h2>`, `<h4>`, and `<p>`.\n\n## Requirements:\n1. Use an `<h2>` element to create a main heading with the content \"Beginner's Guide to Front-end Development\".\n2. Use an `<h4>` element below the main heading to create a subheading with the content \"HTML Basic Structure\".\n3. Use a `<p>` element below the subheading to create a paragraph with the content \"This article will introduce how to use HTML to build the basic structure of a web page.\"\n4. Maintain clear tag hierarchy and do not add any unrelated content.",
   "start_code": {
-    "html": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>编程学习教程</title>\n</head>\n<body>\n    # 请在此处添加你的代码！\n</body>\n</html>",
+    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Programming Learning Tutorial</title>\n</head>\n<body>\n    # Please add your code here!\n</body>\n</html>",
     "css": "",
     "js": ""
   },
   "checkpoints": [
     {
-      "name": "h2元素存在检查",
+      "name": "h2 Element Existence Check",
       "type": "assert_element",
       "selector": "h2",
       "assertion_type": "exists",
-      "feedback": "请在代码中添加一个h2元素。"
+      "feedback": "Please add an h2 element to your code."
     },
     {
-      "name": "h2元素内容检查",
+      "name": "h2 Element Content Check",
       "type": "assert_text_content",
       "selector": "h2",
       "assertion_type": "equals",
-      "value": "前端开发入门指南",
-      "feedback": "h2元素的内容应该为'前端开发入门指南'。"
+      "value": "Beginner's Guide to Front-end Development",
+      "feedback": "The content of the h2 element should be 'Beginner's Guide to Front-end Development'."
     },
     {
-      "name": "h4元素存在检查",
+      "name": "h4 Element Existence Check",
       "type": "assert_element",
       "selector": "h4",
       "assertion_type": "exists",
-      "feedback": "请在代码中添加一个h4元素。"
+      "feedback": "Please add an h4 element to your code."
     },
     {
-      "name": "h4元素位置检查",
+      "name": "h4 Element Position Check",
       "type": "custom_script",
       "script": "const h2 = document.querySelector('h2'); const h4 = document.querySelector('h4'); if (!h2 || !h4) { return false; } const elements = Array.from(document.body.children); const h2Index = elements.indexOf(h2); const h4Index = elements.indexOf(h4); return h2Index !== -1 && h4Index > h2Index;",
-      "feedback": "h4元素应该在h2元素的下边。"
+      "feedback": "The h4 element should be below the h2 element."
     },
     {
-      "name": "h4元素内容检查",
+      "name": "h4 Element Content Check",
       "type": "assert_text_content",
       "selector": "h4",
       "assertion_type": "equals",
-      "value": "HTML基础结构",
-      "feedback": "h4元素的内容应该为'HTML基础结构'。"
+      "value": "HTML Basic Structure",
+      "feedback": "The content of the h4 element should be 'HTML Basic Structure'."
     },
     {
-      "name": "p元素存在检查",
+      "name": "p Element Existence Check",
       "type": "assert_element",
       "selector": "p",
       "assertion_type": "exists",
-      "feedback": "请在代码中添加一个p元素。"
+      "feedback": "Please add a p element to your code."
     },
     {
-      "name": "p元素位置检查",
+      "name": "p Element Position Check",
       "type": "custom_script",
       "script": "const h4 = document.querySelector('h4'); const p = document.querySelector('p'); if (!h4 || !p) { return false; } const elements = Array.from(document.body.children); const h4Index = elements.indexOf(h4); const pIndex = elements.indexOf(p); return h4Index !== -1 && pIndex > h4Index;",
-      "feedback": "p元素应该在h4元素的下边。"
+      "feedback": "The p element should be below the h4 element."
     },
     {
-      "name": "p元素内容检查",
+      "name": "p Element Content Check",
       "type": "assert_text_content",
       "selector": "p",
       "assertion_type": "equals",
-      "value": "本文将介绍如何使用HTML构建网页的基本结构。",
-      "feedback": "p元素的内容应该为'本文将介绍如何使用HTML构建网页的基本结构。'"
+      "value": "This article will introduce how to use HTML to build the basic structure of a web page.",
+      "feedback": "The content of the p element should be 'This article will introduce how to use HTML to build the basic structure of a web page.'"
     }
   ],
   "answer": {
-    "html": "<h2>前端开发入门指南</h2>\n<h4>HTML基础结构</h4>\n<p>本文将介绍如何使用HTML构建网页的基本结构。</p>",
+    "html": "<h2>Beginner's Guide to Front-end Development</h2>\n<h4>HTML Basic Structure</h4>\n<p>This article will introduce how to use HTML to build the basic structure of a web page.</p>",
     "css": "",
     "js": ""
   }

@@ -27,12 +27,12 @@ tracker.init({
 // 初始化函数
 async function initializePage() {
     const participantId = getParticipantId();
-    if (participantId) {
-        const participantElement = document.getElementById('participant_id');
-        if (participantElement) {
-            participantElement.textContent = participantId;
-        }
-    }
+    // if (participantId) {
+    //     const participantElement = document.getElementById('participant_id');
+    //     if (participantElement) {
+    //         participantElement.textContent = participantId;
+    //     }
+    // }
     // 获取并解密URL参数
     // 获取URL参数（带错误处理）
     const topicData = getUrlParam('topic');
@@ -375,16 +375,16 @@ function checkAndTriggerAssistanceAfterAction(topicId, aiAskCount, submissionCou
 async function triggerSmartHint(topicId, conversationHistory, aiAskCount, submissionCount, failedSubmissionCount) {
     try {
         // 构建提示消息
-        const hintMessage = `我注意到您已经询问了${aiAskCount}次问题，并且提交了${submissionCount}次代码（其中${failedSubmissionCount}次未通过）。
+        const hintMessage = `I noticed that you have asked ${aiAskCount} questions and submitted code ${submissionCount} times (with ${failedSubmissionCount} unsuccessful attempts).
 
-**您是否需要我为您提供一些针对性的学习建议或解题思路？**
+**Would you like me to provide some targeted learning suggestions or problem-solving ideas?**
 
-我可以帮您：
-1. 分析您代码中的常见问题
-2. 提供解题思路和关键知识点
-3. 给出一些调试建议
+I can help you:
+1. Analyze common issues in your code
+2. Provide problem-solving approaches and key knowledge points
+3. Offer some debugging suggestions
 
-请告诉我您希望了解哪方面的内容，我会尽力帮助您。`;
+Please let me know which aspect you would like assistance with, and I'll do my best to help you.`;
 
         // 在聊天框中显示提示
         chatModule.addMessageToUI('ai', hintMessage);
@@ -412,12 +412,12 @@ async function provideDirectAnswer(topicId) {
             const answer = task.answer;
 
             // 构建答案消息
-            const answerMessage = `我注意到您在解决这个问题时遇到了一些困难。让我直接为您提供参考答案和解题思路：
+            const answerMessage = `I noticed that you're having some difficulties with this problem. Let me provide you with the reference answer and solution approach directly:
 
-**题目要求：**
+**Requirements:**
 ${task.description_md}
 
-**参考答案：**
+**Reference Answer:**
 \`\`\`html
 ${answer.html || ''}
 \`\`\`
@@ -430,12 +430,12 @@ ${answer.css || ''}
 ${answer.js || ''}
 \`\`\`
 
-**建议：**
-1. 仔细对比您的代码和参考答案，找出差异
-2. 理解每一步的实现原理
-3. 尝试独立重新实现一遍
+**Suggestions:**
+1. Carefully compare your code with the reference answer to identify differences
+2. Understand the implementation principle of each step
+3. Try to re-implement it independently
 
-如果您还有其他问题，欢迎继续提问！`;
+If you have any other questions, feel free to ask!`;
 
             // 在聊天框中显示答案
             chatModule.addMessageToUI('ai', answerMessage);
@@ -817,13 +817,13 @@ function displayTestResult(result) {
         return;
     }
 
-    let content = `<h4>${result.passed ? '✅ 恭喜！通过测试！' : '❌ 未通过测试'}</h4><p>${result.message || ''}</p>`;
+    let content = `<h4>${result.passed ? '✅ Congratulations! You passed the test!' : '❌ Failed the test'}</h4><p>${result.message || ''}</p>`;
     if (result.details && result.details.length > 0) {
         // 对details中的HTML标签进行转义处理，确保它们作为文本显示
         const escapedDetails = result.details.map(detail => {
             return detail.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         });
-        content += `<h5>详细信息:</h5><ul>${escapedDetails.map(d => `<li>${d}</li>`).join('')}</ul>`;
+        content += `<h5>Exhaustive Information:</h5><ul>${escapedDetails.map(d => `<li>${d}</li>`).join('')}</ul>`;
     }
 
     testResultsContent.innerHTML = content;
@@ -872,15 +872,15 @@ async function triggerAskAI(testResult) {
         }
 
         // 构建提示消息
-        const askAIMessage = `您好！我注意到您的代码测试未通过。我可以帮您分析测试结果中的错误原因。
+        const askAIMessage = `Hello! I noticed that your code did not pass the tests. I can help you analyze the error reasons in the test results.
         
-**测试结果:**
-${testResult.message || '无具体信息'}
+**Test Results:**
+${testResult.message || 'No specific information'}
 
-**详细信息:**
-${(testResult.details || []).join('\n') || '无详细信息'}
+**Details:**
+${(testResult.details || []).join('\n') || 'No detailed information'}
 
-您希望我详细解释哪个检查点的错误原因呢？请告诉我您的具体问题，我会针对性地为您解答！`;
+Which checkpoint's error would you like me to explain in detail? Please tell me your specific question, and I will provide targeted explanations for you!`;
 
         // 在聊天框中显示提示
         chatModule.addMessageToUI('ai', askAIMessage);
@@ -1020,10 +1020,10 @@ function showTestCompletionModal(currentTopicId, nextKnowledgeInfo) {
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:check-circle" width="32" height="32" style="color: #4CAF50;"></iconify-icon>
-                    <h2>测试完成！</h2>
+                    <h2>Test completed!</h2>
                 </div>
                 <div class="modal-body">
-                    <p>您已完成测试，现在可以开始学习"${nextKnowledgeInfo.label}"</p>
+                    <p>You have completed the test and may now proceed to translation learning."${nextKnowledgeInfo.label}"</p>
                 </div>
                 <div class="modal-actions">
                     <button id="returnToGraphBtn" class="learn-btn">返回</button>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>模块集成模板 -sync-PBL学习平台</title>
+  <title>Module Integration Template -sync-PBL Learning Platform</title>
   <script src="../js/modules/cytoscape.min.js"></script>
   <link rel="stylesheet" href="../css/styles.css">
   <!-- Iconify图标库 -->
@@ -17,7 +17,7 @@
     <header class="top-header">
       <h1 class="header-title" id="headerTitle">
         <iconify-icon icon="mdi:graph" width="24" height="24"></iconify-icon>
-        标题
+        Knowledge Graph
       </h1>
       <div class="user-profile">
         <iconify-icon icon="mdi:account-circle" width="36" height="36"></iconify-icon>
@@ -29,27 +29,27 @@
       <div class="index-container panel">
         <div class="panel-header">
           <iconify-icon icon="mdi:progress-check" width="20" height="20"></iconify-icon>
-          <h2>学习情况 </h2>
+          <h2>Knowledge Graph</h2>
         </div>
         <div class="group" id="cy">
           <!-- 工具栏 -->
           <div class="cy-toolbar">
-            <button id="zoomIn" title="放大" class="btn btn-small">
+            <button id="zoomIn" title="Enlarge" class="btn btn-small">
               <iconify-icon icon="mdi:magnify-plus" width="16" height="16"></iconify-icon>
             </button>
-            <button id="zoomOut" title="缩小" class="btn btn-small">
+            <button id="zoomOut" title="Reduce" class="btn btn-small">
               <iconify-icon icon="mdi:magnify-minus" width="16" height="16"></iconify-icon>
             </button>
-            <button id="centerGraph" title="居中" class="btn btn-small">
+            <button id="centerGraph" title="Center" class="btn btn-small">
               <iconify-icon icon="mdi:select-search" width="16" height="16"></iconify-icon>
-              居中
+              Center
             </button>
           </div>
 
           <!-- 提示信息 -->
           <div class="cy-tip">
             <iconify-icon icon="mdi:information" width="16" height="16"></iconify-icon>
-            <span>提示: 单击节点展开/收起，双击节点查看详情</span>
+            <span>Tip: Click a node to expand/collapse, and double-click a node to view details.</span>
           </div>
           <!-- 知识点详情弹窗 -->
           <div id="knowledgeModal" class="modal">
@@ -60,10 +60,10 @@
               <p id="modalStatus"></p>
               <div class="modal-actions">
                 <button id="learnBtn" class="btn btn-primary">
-                  学习
+                  Learn
                 </button>
                 <button id="testBtn" class="btn btn-primary">
-                  测试
+                  Test
                 </button>
               </div>
             </div>

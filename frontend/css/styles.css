@@ -1,4 +1,4 @@
-    /* 统一样式：添加修改元素样式的时候请尽量使用规定好的样式，修改前先查看样式，避免重复定义 */
+/* 统一样式：添加修改元素样式的时候请尽量使用规定好的样式，修改前先查看样式，避免重复定义 */
     :root {
         --background-color: #f8fafc;
         --panel-background: #ffffff;
@@ -1424,14 +1424,14 @@
         display: flex;
         align-items: center;
         /* 移除justify-content，让flex和gap自然控制分布 */
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
         /* 减少卡片间距，让卡片更宽 */
         width: 100%;
         /* 占满整个容器宽度 */
-        height: 75%;
-        /* 增加高度比例到75% */
-        max-height: 250px;
-        /* 适当增加最大高度 */
+        height: 90%;
+        /* 增加高度比例到80% */
+        max-height: none;
+        /* 移除最大高度限制，让内容决定高度 */
         min-height: 130px;
         /* 适当增加最小高度 */
         box-sizing: border-box;
@@ -1474,6 +1474,8 @@
         width: 0;
         /* 强制宽度由flex计算 */
         box-sizing: border-box;
+        /* 增加卡片宽度 */
+        flex-grow: 1.2;
     }
 
     /* 在小屏幕上调整卡片布局 */
@@ -1483,8 +1485,10 @@
             /* 小屏幕上也占满宽 */
             height: 80%;
             /* 增加高度比例 */
-            gap: var(--spacing-md);
+            gap: var(--spacing-sm);
             /* 减少间距 */
+            max-height: none;
+            /* 移除最大高度限制，让内容决定高度 */
         }
 
         .level-card {
@@ -1509,6 +1513,8 @@
             /* 增加高度比例 */
             gap: var(--spacing-sm);
             /* 进一步减小间距 */
+            max-height: none;
+            /* 移除最大高度限制，让内容决定高度 */
         }
 
         .level-card {
@@ -1535,15 +1541,15 @@
     .level-card.collapsed {
         /* collapsed状态使用默认样式，不需要特别设置高度 */
         padding: var(--spacing-md);
+        height: 165px; /* 设置固定高度 */
     }
 
     .level-card.expanded {
         /* 展开时使用更紧凑的高度和内边距 */
         height: auto;
-        min-height: auto;
-        /* 完全由内容决定高度 */
-        max-height: 800px;
-        /* 存留最大高度限制 */
+        min-height: 200px; /* 增加最小高度 */
+        max-height: none;
+        /* 移除最大高度限制，让内容决定高度 */
         padding: var(--spacing-xs) var(--spacing-md) 0 var(--spacing-md);
         /* 移除底部内边距 */
         z-index: 10;
@@ -1570,8 +1576,8 @@
 
     .level-content {
         opacity: 1;
-        max-height: 500px;
-        /* 增加最大高度限制，让内容能够完全显示 */
+        max-height: none;
+        /* 移除最大高度限制，让内容能够完全显示 */
         overflow-y: auto;
         /* 添加垂直滚动条 */
         transition: all 0.2s ease;
@@ -1579,6 +1585,8 @@
         word-wrap: break-word;
         /* 确保文本能换行 */
         overflow-wrap: break-word;
+        margin-bottom: 0;
+        /* 移除底部边距 */
     }
 
     .level-card.collapsed .level-content {
@@ -1643,9 +1651,9 @@
         font-size: var(--font-size-xs);
         color: var(--primary-color);
         text-align: center;
-        margin-top: auto;
-        /* 自动推到底部 */
-        padding: var(--spacing-xs) 0;
+        margin-top: 0;
+        /* 移除顶部边距 */
+        padding: 0;
         opacity: 0.8;
         font-weight: 500;
         transition: all 0.3s ease;
@@ -1780,9 +1788,14 @@
         gap: var(--spacing-lg);
     }
 
-    .editor-tabs-left {
+    .editor-tabs-container {
         display: flex;
-        gap: var(--spacing-sm);
+        gap: 2px;
+        margin-left: 20px;
+        background-color: #f0f0f0;
+        padding: 4px;
+        border-radius: var(--border-radius-md);
+        border: none;
     }
 
     .editor-tabs-right {
@@ -1791,29 +1804,37 @@
     }
 
     .tab-button {
-        padding: var(--spacing-sm) var(--spacing-md);
-        border-radius: var(--border-radius-md);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--border-radius-sm);
         font-weight: 600;
-        font-size: var(--font-size-sm);
+        font-size: 10px;
         display: inline-flex;
         align-items: center;
-        min-width: 80px;
+        min-width: 70px;
         justify-content: center;
         gap: var(--spacing-xs);
         background-color: #f5f5f5;
-        border: 2px solid var(--border-color);
+        border: none;
         cursor: pointer;
         transition: all 0.2s ease;
+        margin: 0;
     }
 
     .tab-button.active {
         background-color: var(--primary-color);
         color: white;
+        border-color: var(--primary-color);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .tab-button:hover {
+    .tab-button:hover:not(.active) {
+        background-color: #e5e5e5;
+        border-color: #cccccc;
+    }
+
+    .tab-button:hover.active {
         background-color: var(--primary-hover);
-        color: white;
+        border-color: var(--primary-hover);
     }
 
     .editor-preview-area {
