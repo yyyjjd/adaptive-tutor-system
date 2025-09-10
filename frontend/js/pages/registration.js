@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (result.code === 200 || result.code === 201) {
                     saveParticipantId(result.data.participant_id);
-                    // 直接跳转到学习页面
-                    navigateTo('/pages/learning_page.html', '1_1', true);
+                    // 直接跳转到知识图谱页面
+                    window.location.href = '/pages/knowledge_graph.html';
                 } else {
                     showError(result.message || '启动失败，请重试');
                     // 恢复按钮状态

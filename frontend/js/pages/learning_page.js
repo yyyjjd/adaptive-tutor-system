@@ -731,31 +731,6 @@ function initEventListeners() {
     const expandElement2 = document.querySelector('.header-icon-container');
     const knowledgeGraphContainer = document.getElementById('knowledge-graph-container');
     
-    // 创建或获取图标的函数
-    function getOrCreateToggleIcon() {
-        let toggleIcon = document.getElementById('toggleIcon');
-        if (!toggleIcon) {
-            toggleIcon = document.createElement('iconify-icon');
-            toggleIcon.id = 'toggleIcon';
-            toggleIcon.setAttribute('icon', 'mdi:chevron-down');
-            toggleIcon.setAttribute('width', '24');
-            toggleIcon.setAttribute('height', '24');
-            toggleIcon.style.color = '#4f46e5';
-            toggleIcon.style.opacity = '0.8';
-            toggleIcon.style.marginLeft = '8px';
-            toggleIcon.style.transition = 'all 0.3s ease';
-        }
-        return toggleIcon;
-    }
-    
-    // 确保图标存在
-    if (expandElement2) {
-        let toggleIcon = getOrCreateToggleIcon();
-        if (!expandElement2.contains(toggleIcon)) {
-            expandElement2.appendChild(toggleIcon);
-        }
-    }
-    
     // 为标题添加点击事件
     if (expandElement1) {
         expandElement1.style.cursor = 'pointer';
@@ -768,18 +743,6 @@ function initEventListeners() {
                 await showKnowledgeGraph();
             } else {
                 knowledgeGraphContainer.style.display = 'none';
-            }
-            
-            // 更新图标
-            const toggleIcon = getOrCreateToggleIcon();
-            if (isExpanding) {
-                toggleIcon.setAttribute('icon', 'mdi:chevron-up');
-                toggleIcon.style.color = '#3730a3';
-                toggleIcon.style.opacity = '1';
-            } else {
-                toggleIcon.setAttribute('icon', 'mdi:chevron-down');
-                toggleIcon.style.color = '#4f46e5';
-                toggleIcon.style.opacity = '0.8';
             }
         });
     }
@@ -797,18 +760,6 @@ function initEventListeners() {
             } else {
                 knowledgeGraphContainer.style.display = 'none';
             }
-            
-            // 更新图标
-            const toggleIcon = getOrCreateToggleIcon();
-            if (isExpanding) {
-                toggleIcon.setAttribute('icon', 'mdi:chevron-up');
-                toggleIcon.style.color = '#3730a3';
-                toggleIcon.style.opacity = '1';
-            } else {
-                toggleIcon.setAttribute('icon', 'mdi:chevron-down');
-                toggleIcon.style.color = '#4f46e5';
-                toggleIcon.style.opacity = '0.8';
-            }
         });
     }
     
@@ -817,12 +768,6 @@ function initEventListeners() {
     if (closeGraphButton && knowledgeGraphContainer) {
         closeGraphButton.addEventListener('click', () => {
             knowledgeGraphContainer.style.display = 'none';
-            
-            // 更新图标
-            const toggleIcon = getOrCreateToggleIcon();
-            toggleIcon.setAttribute('icon', 'mdi:chevron-down');
-            toggleIcon.style.color = '#4f46e5';
-            toggleIcon.style.opacity = '0.8';
         });
     }
 

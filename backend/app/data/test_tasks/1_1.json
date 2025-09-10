@@ -1,6 +1,6 @@
 {
   "topic_id": "1.1",
-  "title": "1.1 Using \"h\" and \"p\" elements for headings and paragraphs",
+  "title": "  1.1 Using \"h\" and \"p\" elements for headings and paragraphs",
   "description_md": "# Task Description:\nPlease use HTML tags to build a simple page structure, including a main heading, subheading, and body paragraphs. The goal is to become familiar with the usage of common structural tags `<h2>`, `<h4>`, and `<p>`.\n\n## Requirements:\n1. Use an `<h2>` element to create a main heading with the content \"Beginner's Guide to Front-end Development\".\n2. Use an `<h4>` element below the main heading to create a subheading with the content \"HTML Basic Structure\".\n3. Use a `<p>` element below the subheading to create a paragraph with the content \"This article will introduce how to use HTML to build the basic structure of a web page.\"\n4. Maintain clear tag hierarchy and do not add any unrelated content.",
   "start_code": {
     "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Programming Learning Tutorial</title>\n</head>\n<body>\n    # Please add your code here!\n</body>\n</html>",

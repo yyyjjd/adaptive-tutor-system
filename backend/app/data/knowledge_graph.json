@@ -1,33 +1,98 @@
 {
   "nodes": [
-    { "data": { "id": "chapter1", "label": "Module 1: Text and Page Structure Basics", "category": "chapter", "placementHint": "structural" } },
-    { "data": { "id": "text_paragraph", "label": "Using h and p elements for headings and paragraphs", "category": "text-content", "placementHint": "main-content" } },
-    { "data": { "id": "text_format", "label": "Applying text formatting (bold, italic)", "category": "text-style", "placementHint": "main-content" } },
-    { "data": { "id": "structure_header", "label": "Building page header structure", "category": "layout", "placementHint": "header" } },
+    { "data": { "id": "1_end", "label": "Module 1: Text and Page Structure Basics", "type": "chapter" } },
+    { "data": { "id": "1_1", "label": "Using \"h\" and \"p\" elements for headings and paragraphs", "type": "knowledge" } },
+    { "data": { "id": "1_2", "label": "Applying text formatting (bold, italic)", "type": "knowledge" } },
+    { "data": { "id": "1_3", "label": "Building page header structure", "type": "knowledge" } },
 
-    { "data": { "id": "chapter2", "label": "Module 2: Using Boxes and Lists", "category": "chapter", "placementHint": "structural" } },
-    { "data": { "id": "structure_div", "label": "Using box elements for content division", "category": "layout", "placementHint": "main-content" } },
-    { "data": { "id": "text_list_ol", "label": "Creating ordered lists", "category": "text-content", "placementHint": "main-content" } },
-    { "data": { "id": "text_list_ul", "label": "Creating unordered lists", "category": "text-content", "placementHint": "sidebar" } },
+    { "data": { "id": "2_end", "label": "Module 2: Using Boxes and Lists", "type": "chapter" } },
+    { "data": { "id": "2_1", "label": "Using box elements for content division", "type": "knowledge" } },
+    { "data": { "id": "2_2", "label": "Creating ordered lists", "type": "knowledge" } },
+    { "data": { "id": "2_3", "label": "Creating unordered lists", "type": "knowledge" } },
 
-    { "data": { "id": "chapter3", "label": "Module 3: Forms and Interactive Controls", "category": "chapter", "placementHint": "structural" } },
-    { "data": { "id": "form_input", "label": "Using text boxes and buttons", "category": "form", "placementHint": "main-content" } },
-    { "data": { "id": "form_checkbox", "label": "Checkboxes and radio buttons", "category": "form", "placementHint": "main-content" } },
-    { "data": { "id": "form_submit", "label": "Form submission mechanism", "category": "form", "placementHint": "main-content" } },
+    { "data": { "id": "3_end", "label": "Module 3: Forms and Interactive Controls", "type": "chapter" } },
+    { "data": { "id": "3_1", "label": "Using text boxes and buttons", "type": "knowledge" } },
+    { "data": { "id": "3_2", "label": "Checkboxes and radio buttons", "type": "knowledge" } },
+    { "data": { "id": "3_3", "label": "Form submission mechanism", "type": "knowledge" } },
+    
+    { "data": { "id": "4_end", "label": "Module 4: Styling and Layout", "type": "chapter" } },
+    { "data": { "id": "4_1", "label": "Setting colors and fonts", "type": "knowledge" } },
+    { "data": { "id": "4_2", "label": "Understanding the box model", "type": "knowledge" } },
+    { "data": { "id": "4_3", "label": "Using Flex for layout", "type": "knowledge" } },
 
-    { "data": { "id": "chapter4", "label": "Module 4: Styling and Layout", "category": "chapter", "placementHint": "structural" } },
-    { "data": { "id": "style_basic", "label": "Setting colors and fonts", "category": "styling", "placementHint": "global" } },
-    { "data": { "id": "style_box", "label": "Understanding the box model", "category": "styling", "placementHint": "global" } },
-    { "data": { "id": "style_flex", "label": "Using Flex for layout", "category": "layout", "placementHint": "global" } },
+    { "data": { "id": "5_end", "label": "Module 5: Media and Resource Management", "type": "chapter" } },
+    { "data": { "id": "5_1", "label": "Inserting and managing images", "type": "knowledge" } },
+    { "data": { "id": "5_2", "label": "Incorporating audio files", "type": "knowledge" } },
+    { "data": { "id": "5_3", "label": "Embedding video content", "type": "knowledge" } },
 
-    { "data": { "id": "chapter5", "label": "Module 5: Media and Resource Management", "category": "chapter", "placementHint": "structural" } },
-    { "data": { "id": "media_image", "label": "Inserting and managing images", "category": "media", "placementHint": "main-content" } },
-    { "data": { "id": "media_audio", "label": "Incorporating audio files", "category": "media", "placementHint": "sidebar" } },
-    { "data": { "id": "media_video", "label": "Embedding video content", "category": "media", "placementHint": "sidebar" } },
+    { "data": { "id": "6_end", "label": "Module 6: Basic Interaction Logic", "type": "chapter" } },
+    { "data": { "id": "6_1", "label": "Button click events", "type": "knowledge" } },
+    { "data": { "id": "6_2", "label": "Getting user input", "type": "knowledge" } },
+    { "data": { "id": "6_3", "label": "Modifying page elements (DOM manipulation)", "type": "knowledge" } }
+  ],
+  "edges": [
 
-    { "data": { "id": "chapter6", "label": "Module 6: Basic Interaction Logic", "category": "chapter", "placementHint": "structural" } },
-    { "data": { "id": "js_click", "label": "Button click events", "category": "interaction", "placementHint": "main-content" } },
-    { "data": { "id": "js_input", "label": "Getting user input", "category": "interaction", "placementHint": "main-content" } },
-    { "data": { "id": "js_dom", "label": "Modifying page elements (DOM manipulation)", "category": "interaction", "placementHint": "main-content" } }
+    { "data": { "source": "1_end", "target": "2_end" } },
+    { "data": { "source": "2_end", "target": "3_end" } },
+    { "data": { "source": "3_end", "target": "4_end" } },
+    { "data": { "source": "4_end", "target": "5_end" } },
+    { "data": { "source": "5_end", "target": "6_end" } },
+
+    { "data": { "source": "1_end", "target": "1_1" } },
+    { "data": { "source": "1_end", "target": "1_2" } },
+    { "data": { "source": "1_end", "target": "1_3" } },
+
+    { "data": { "source": "2_end", "target": "2_1" } },
+    { "data": { "source": "2_end", "target": "2_2" } },
+    { "data": { "source": "2_end", "target": "2_3" } },
+
+    { "data": { "source": "3_end", "target": "3_1" } },
+    { "data": { "source": "3_end", "target": "3_2" } },
+    { "data": { "source": "3_end", "target": "3_3" } },
+
+    { "data": { "source": "4_end", "target": "4_1" } },
+    { "data": { "source": "4_end", "target": "4_2" } },
+    { "data": { "source": "4_end", "target": "4_3" } },
+
+    { "data": { "source": "5_end", "target": "5_1" } },
+    { "data": { "source": "5_end", "target": "5_2" } },
+    { "data": { "source": "5_end", "target": "5_3" } },
+
+    { "data": { "source": "6_end", "target": "6_1" } },
+    { "data": { "source": "6_end", "target": "6_2" } },
+    { "data": { "source": "6_end", "target": "6_3" } }
+  ],
+  "dependent_edges": [
+
+    { "data": { "source": "1_end", "target": "2_end" } },
+    { "data": { "source": "2_end", "target": "3_end" } },
+    { "data": { "source": "3_end", "target": "4_end" } },
+    { "data": { "source": "4_end", "target": "5_end" } },
+    { "data": { "source": "5_end", "target": "6_end" } },
+
+    { "data": { "source": "1_end", "target": "1_1" } },
+    { "data": { "source": "1_1", "target": "1_2" } },
+    { "data": { "source": "1_2", "target": "1_3" } },
+
+    { "data": { "source": "2_end", "target": "2_1" } },
+    { "data": { "source": "2_1", "target": "2_2" } },
+    { "data": { "source": "2_2", "target": "2_3" } },
+
+    { "data": { "source": "3_end", "target": "3_1" } },
+    { "data": { "source": "3_1", "target": "3_2" } },
+    { "data": { "source": "3_2", "target": "3_3" } },
+
+    { "data": { "source": "4_end", "target": "4_1" } },
+    { "data": { "source": "4_1", "target": "4_2" } },
+    { "data": { "source": "4_2", "target": "4_3" } },
+
+    { "data": { "source": "5_end", "target": "5_1" } },
+    { "data": { "source": "5_1", "target": "5_2" } },
+    { "data": { "source": "5_2", "target": "5_3" } },
+
+    { "data": { "source": "6_end", "target": "6_1" } },
+    { "data": { "source": "6_1", "target": "6_2" } },
+    { "data": { "source": "6_2", "target": "6_3" } }
   ]
 }
+

@@ -1116,12 +1116,12 @@ export class MiniKnowledgeGraph {
         knowledgeGraphContainer.style.display = 'block';
 
         // 更新图标状态
-        const toggleIcon = document.getElementById('toggleIcon');
-        if (toggleIcon) {
-          toggleIcon.setAttribute('icon', 'mdi:chevron-up');
-          toggleIcon.style.color = '#3730a3'; // 更深的紫色
-          toggleIcon.style.opacity = '1';     // 完全不透明
-        }
+        // const toggleIcon = document.getElementById('toggleIcon');
+        // if (toggleIcon) {
+        //   toggleIcon.setAttribute('icon', 'mdi:chevron-up');
+        //   toggleIcon.style.color = '#3730a3'; // 更深的紫色
+        //   toggleIcon.style.opacity = '1';     // 完全不透明
+        // }
       }
     }
   }

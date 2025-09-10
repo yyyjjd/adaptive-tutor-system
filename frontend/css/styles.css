@@ -18,6 +18,7 @@
         --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
         --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         --header-height: 64px;
         --header-font-size: 18px;
         --title-font-size: 18px;
@@ -174,6 +175,43 @@
         z-index: 20;
         /* 确保标题栏位于较高层级 */
         transition: height 0.3s ease;
+    }
+
+    /* 下拉图标容器样式 */
+    .header-icon-container {
+        margin-right: auto;
+        margin-left: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dropdown-icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: var(--shadow-medium);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        left: 4px; /* 增加图标位置向右的偏移 */
+    }
+
+    .dropdown-icon-wrapper:hover {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .dropdown-icon-wrapper iconify-icon {
+        color: var(--primary-color);
+        width: 20px;
+        height: 20px;
+        position: relative;
+        left: 3.5px; /* 图标向右偏移 */
     }
 
     .top-header-lean:hover {
@@ -357,6 +395,11 @@
     }
 
     /* 修改为不改变位置的悬停效果 */
+
+    /* 为标题栏中的图标添加右边距 */
+    .top-header-lean iconify-icon {
+        margin-right: var(--spacing-sm);
+    }
     .mini-knowledge-graph:hover,
     .top-header-lean:hover .mini-knowledge-graph:hover {
         box-shadow: var(--card-shadow) !important;
@@ -1303,6 +1346,11 @@
         z-index: 10;
         /* 确保默认状态下所有等级卡片都可见 */
     }
+    
+    /* .knowledge-panel.expanded {
+        height: auto;
+        flex: 1 1 auto;
+    } */
 
     /* 确保默认状态下所有等级卡片都可见 */
     .knowledge-panel:not(.expanded) .level-card {
@@ -1418,6 +1466,11 @@
         padding: var(--spacing-md);
         box-sizing: border-box;
     }
+    
+    .knowledge-panel.expanded .levels-container {
+        height: auto;
+        align-items: stretch;
+    }
 
     /* 等级流展示 */
     .levels-flow {
@@ -1435,6 +1488,12 @@
         min-height: 130px;
         /* 适当增加最小高度 */
         box-sizing: border-box;
+    }
+    
+    .knowledge-panel.expanded .levels-flow {
+        height: auto;
+        min-height: auto;
+        align-items: stretch;
     }
 
     .levels-flow .arrow {
@@ -1476,6 +1535,12 @@
         box-sizing: border-box;
         /* 增加卡片宽度 */
         flex-grow: 1.2;
+        /* 确保内部绝对定位元素能正确工作 */
+        overflow: hidden;
+    }
+    
+    .knowledge-panel.expanded .level-card.expanded {
+        flex: 1 1 auto;
     }
 
     /* 在小屏幕上调整卡片布局 */
@@ -1541,15 +1606,31 @@
     .level-card.collapsed {
         /* collapsed状态使用默认样式，不需要特别设置高度 */
         padding: var(--spacing-md);
-        height: 165px; /* 设置固定高度 */
+        height: 140px; /* 减小固定高度 */
+    }
+
+    .level-card.expanded {
+        height: auto;
+    }
+    
+    /* 针对折叠状态卡片中的标题区域添加居中样式 */
+    .level-card.collapsed .level-header .level-description{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        text-align: center;
     }
 
     .level-card.expanded {
         /* 展开时使用更紧凑的高度和内边距 */
         height: auto;
-        min-height: 200px; /* 增加最小高度 */
+        min-height: auto;
+        /* 完全由内容决定高度 */
         max-height: none;
-        /* 移除最大高度限制，让内容决定高度 */
+        /* 移除最大高度限制，让内容可以完全显示 */
         padding: var(--spacing-xs) var(--spacing-md) 0 var(--spacing-md);
         /* 移除底部内边距 */
         z-index: 10;
@@ -1585,8 +1666,9 @@
         word-wrap: break-word;
         /* 确保文本能换行 */
         overflow-wrap: break-word;
-        margin-bottom: 0;
-        /* 移除底部边距 */
+        margin-bottom: calc(var(--spacing-sm) + 20px);
+        /* 为click-hint留出空间 */
+        flex: 1; /* 允许内容区域增长 */
     }
 
     .level-card.collapsed .level-content {
@@ -1638,13 +1720,24 @@
         flex: 0 0 auto;
         /* 不让描述拉伸 */
         /* 响应式高度：自适应内容 */
+    }
+    
+    /* 针对折叠状态卡片中的描述文本添加居中样式 */
+    .level-card.collapsed .content-text {
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
-        /* 超出部分隐藏 */
+        width: 100%;
         padding: 0 var(--spacing-xs);
-        /* 左右内边距 */
+        box-sizing: border-box;
+    }
+    
+    /* 确保展开状态卡片中的描述文本不应用居中样式 */
+    .level-card.expanded .level-description {
+        display: block;
+        text-align: center;
+        width: auto;
+        padding: 0;
     }
 
     .click-hint {
@@ -1663,6 +1756,12 @@
         align-items: center;
         justify-content: center;
         gap: var(--spacing-xs);
+        /* 定位在卡片底部 */
+        position: absolute;
+        bottom: var(--spacing-sm);
+        left: 50%;
+        transform: translateX(calc(-50% - 8px));
+        z-index: 60;
     }
 
     .level-card.collapsed .click-hint {
@@ -2878,7 +2977,7 @@
         position: relative;
         z-index: 100;
         /* 确保展开时知识点面板仍然可见 */
-        min-height: 300px;
+        min-height: 500px;
         background: var(--content-background);
     }
 
@@ -2929,13 +3028,15 @@
         min-height: auto;
         /* 移除最小高度限制，完全由内容决定高度 */
         max-height: none;
-        /* 移除最大高度限制，允许卡片自适应内容高度 */
+        /* 移除最大高度限制，让内容完全决定高度 */
         height: auto;
         /* 确保高度自适应内容 */
         padding: var(--spacing-xs) var(--spacing-md);
         /* 使用更紧凑的内边距 */
         margin-bottom: 0;
         /* 删除底部边距 */
+        flex: 1 1 auto;
+        /* 允许卡片根据内容扩展 */
     }
 
     /* 图标相关样式 */
@@ -3061,6 +3162,7 @@
         .knowledge-panel.expanded .level-card.expanded {
             min-height: auto;
             max-height: none;
+            height: auto;
         }
     }
 
@@ -3070,10 +3172,12 @@
             max-width: 100%;
             width: 100%;
             padding: var(--spacing-xl);
+            min-height: auto; /* 移除最小高度限制，让内容决定高度 */
+            max-height: none; /* 移除最大高度限制 */
         }
 
         .level-card.expanded .level-content {
-            max-height: 800px;
+            max-height: none;
             padding: var(--spacing-md);
         }
     }
