@@ -829,14 +829,10 @@ function displayTestResult(result) {
     testResultsContent.innerHTML = content;
     testResultsContent.className = result.passed ? 'test-result-passed' : 'test-result-failed';
 
-    // 显示"询问AI"按钮（仅在测试失败时显示，跳跃学习场景下隐藏）
+    // 显示"询问AI"按钮（仅在测试失败时显示）
     const askAIContainer = document.getElementById('ask-ai-container');
     if (askAIContainer) {
-        // 检查是否是跳跃学习场景
-        const returnUrl = getReturnUrl();
-        const isJumpLearning = isJumpLearningScenario(returnUrl);
-
-        if (result.passed || isJumpLearning) {
+        if (result.passed) {
             askAIContainer.style.display = 'none';
         } else {
             askAIContainer.style.display = 'block';
@@ -899,6 +895,154 @@ Which checkpoint's error would you like me to explain in detail? Please tell me 
     }
 }
 
+// ==================== AI头像处理模块 ====================
+
+/**
+ * 统一处理AI头像显示
+ * 确保所有AI头像都使用机器人图标而不是文字
+ */
+function unifyAIAvatars() {
+    console.log('[TestPage] 开始统一处理AI和用户头像显示');
+
+    // 处理AI头像
+    const aiAvatars = document.querySelectorAll('.ai-avatar');
+    console.log(`[TestPage] 找到 ${aiAvatars.length} 个AI头像元素`);
+
+    let aiReplacedCount = 0;
+    aiAvatars.forEach((avatar, index) => {
+        // 检查是否已经包含iconify-icon
+        const existingIcon = avatar.querySelector('iconify-icon');
+        if (existingIcon) {
+            console.log(`[TestPage] AI头像 ${index + 1} 已经使用图标，跳过`);
+            return;
+        }
+
+        // 检查是否包含"AI"文字
+        if (avatar.textContent.trim() === 'AI') {
+            console.log(`[TestPage] 替换AI头像 ${index + 1} 的文字为机器人图标`);
+            avatar.innerHTML = '<iconify-icon icon="mdi:robot" width="20" height="20"></iconify-icon>';
+            aiReplacedCount++;
+        }
+    });
+
+    // 处理用户头像
+    const userAvatars = document.querySelectorAll('.user-avatar');
+    console.log(`[TestPage] 找到 ${userAvatars.length} 个用户头像元素`);
+
+    let userReplacedCount = 0;
+    userAvatars.forEach((avatar, index) => {
+        // 检查是否已经包含iconify-icon
+        const existingIcon = avatar.querySelector('iconify-icon');
+        if (existingIcon) {
+            console.log(`[TestPage] 用户头像 ${index + 1} 已经使用图标，跳过`);
+            return;
+        }
+
+        // 检查是否包含"你"文字
+        if (avatar.textContent.trim() === '你') {
+            console.log(`[TestPage] 替换用户头像 ${index + 1} 的文字为用户图标`);
+            avatar.innerHTML = '<iconify-icon icon="mdi:account" width="20" height="20"></iconify-icon>';
+            userReplacedCount++;
+        }
+    });
+
+    console.log(`[TestPage] 共替换了 ${aiReplacedCount} 个AI头像和 ${userReplacedCount} 个用户头像`);
+
+    // 重写chatModule的addMessageToUI方法以确保新消息也使用图标
+    if (chatModule && typeof chatModule.addMessageToUI === 'function') {
+        const originalAddMessageToUI = chatModule.addMessageToUI.bind(chatModule);
+
+        chatModule.addMessageToUI = function (sender, content) {
+            // 调用原始方法
+            originalAddMessageToUI(sender, content);
+
+            // 处理新生成的头像
+            setTimeout(() => {
+                if (sender === 'ai') {
+                    // 处理AI头像
+                    const newAiAvatars = document.querySelectorAll('.ai-avatar');
+                    newAiAvatars.forEach(avatar => {
+                        if (avatar.textContent.trim() === 'AI' && !avatar.querySelector('iconify-icon')) {
+                            console.log('[TestPage] 替换新生成的AI头像为机器人图标');
+                            avatar.innerHTML = '<iconify-icon icon="mdi:robot" width="20" height="20"></iconify-icon>';
+                        }
+                    });
+                } else if (sender === 'user') {
+                    // 处理用户头像
+                    const newUserAvatars = document.querySelectorAll('.user-avatar');
+                    newUserAvatars.forEach(avatar => {
+                        if (avatar.textContent.trim() === '你' && !avatar.querySelector('iconify-icon')) {
+                            console.log('[TestPage] 替换新生成的用户头像为用户图标');
+                            avatar.innerHTML = '<iconify-icon icon="mdi:account" width="20" height="20"></iconify-icon>';
+                        }
+                    });
+                }
+            }, 0);
+        };
+
+        console.log('[TestPage] 已重写chatModule.addMessageToUI方法以确保头像一致性');
+    } else {
+        console.warn('[TestPage] chatModule不可用，无法重写addMessageToUI方法');
+    }
+
+    console.log('[TestPage] AI和用户头像统一处理完成');
+}
+
+/**
+ * 全局头像监控器
+ * 监控DOM变化，自动处理新添加的AI和用户头像
+ */
+function setupAIAvatarObserver() {
+    console.log('[TestPage] 设置全局头像监控器（AI+用户）');
+
+    // 创建MutationObserver来监控DOM变化
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        // 检查新添加的节点是否包含AI头像
+                        let aiAvatars = node.querySelectorAll ? Array.from(node.querySelectorAll('.ai-avatar')) : [];
+                        if (node.classList && node.classList.contains('ai-avatar')) {
+                            aiAvatars.push(node);
+                        }
+
+                        // 检查新添加的节点是否包含用户头像
+                        let userAvatars = node.querySelectorAll ? Array.from(node.querySelectorAll('.user-avatar')) : [];
+                        if (node.classList && node.classList.contains('user-avatar')) {
+                            userAvatars.push(node);
+                        }
+
+                        // 处理AI头像
+                        aiAvatars.forEach(avatar => {
+                            if (avatar.textContent.trim() === 'AI' && !avatar.querySelector('iconify-icon')) {
+                                console.log('[TestPage] 监控器检测到新的AI头像，自动替换为机器人图标');
+                                avatar.innerHTML = '<iconify-icon icon="mdi:robot" width="20" height="20"></iconify-icon>';
+                            }
+                        });
+
+                        // 处理用户头像
+                        userAvatars.forEach(avatar => {
+                            if (avatar.textContent.trim() === '你' && !avatar.querySelector('iconify-icon')) {
+                                console.log('[TestPage] 监控器检测到新的用户头像，自动替换为用户图标');
+                                avatar.innerHTML = '<iconify-icon icon="mdi:account" width="20" height="20"></iconify-icon>';
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    // 开始监控整个文档的子节点变化
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    console.log('[TestPage] 全局头像监控器已启动（AI+用户）');
+}
+
 // 主程序入口
 document.addEventListener('DOMContentLoaded', function () {
     // 设置标题和返回按钮
@@ -919,6 +1063,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (contentId && contentId.id) {
             // 使用新的聊天模块初始化
             chatModule.init('test', contentId, { enableEnterToSend: false });
+            
+            // 统一处理AI头像显示（立即执行）
+            unifyAIAvatars();
+
+            // 设置全局AI头像监控器
+            setupAIAvatarObserver();
+
+            // 再次延迟执行，确保所有元素都已加载
+            setTimeout(() => {
+                console.log('[TestPage] 延迟执行AI头像统一处理');
+                unifyAIAvatars();
+            }, 500);
         }
     });
 });
@@ -1221,18 +1377,19 @@ async function triggerProblemSolvingHint(topicId) {
         const conversationHistory = chatModule.getConversationHistory();
 
         // 构建提示消息
-        const hintMessage = `您好！我注意到您点击了"给点灵感"按钮。我可以为您提供一些关于这道题的解题思路和关键知识点。
+        const hintMessage =`Hello! I noticed you clicked the "Inspire Me" button. I can provide you with some ideas and key points for solving this problem.
 
-**题目要求：**
-${task.description_md || '暂无描述'}
+**Problem Requirement:**
+${task.description_md || 'No description available'}
 
-**您希望我提供哪方面的帮助？**
-1. 整体解题思路分析
-2. 关键知识点讲解
-3. 代码实现要点
-4. 常见错误及调试建议
+**Which type of help would you like me to provide?**
+1. Overall problem-solving approach
+2. Key knowledge point explanation
+3. Code implementation tips
+4. Common mistakes and debugging suggestions
 
-请告诉我您的需求，我会针对性地为您解答！`;
+Please let me know your needs, and I will give you targeted guidance!`;
+
 
         // 在聊天框中显示提示
         chatModule.addMessageToUI('ai', hintMessage);
@@ -1337,17 +1494,18 @@ function showJumpLearningSuccessModal(currentTopicId, nextKnowledgeId) {
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:check-circle" width="32" height="32" style="color: #4CAF50;"></iconify-icon>
-                    <h2>章节测试通过！</h2>
+                    <h2>Chapter Test Passed!</h2>
                 </div>
                 <div class="modal-body">
-                    <p>您已完成"${getKnowledgeLabel(currentTopicId)}"，现在可以继续学习"${getKnowledgeLabel(nextKnowledgeId)}"</p>
+                    <p>You have completed "${getKnowledgeLabel(currentTopicId)}", now you can continue learning "${getKnowledgeLabel(nextKnowledgeId)}"</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="continueLearningBtn" class="learn-btn">继续学习</button>
+                    <button id="continueLearningBtn" class="learn-btn">Continue Learning</button>
                 </div>
             </div>
         </div>
     `;
+
 
     document.body.insertAdjacentHTML('beforeend', modalHtml);
 
@@ -1433,18 +1591,19 @@ function showJumpLearningDirectAccessModal(chapterNum, nextChapterNum, targetKno
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:check-circle" width="32" height="32" style="color: #4CAF50;"></iconify-icon>
-                    <h2>章节测试通过！</h2>
+                    <h2>Chapter Test Passed!</h2>
                 </div>
                 <div class="modal-body">
-                    <p>恭喜！您已完成第${chapterNum}章章节测试，第${nextChapterNum}章已解锁！</p>
-                    <p>前置知识点"${getKnowledgeLabel(previousKnowledgeId)}"已完成，现在可以直接学习"${getKnowledgeLabel(targetKnowledgeId)}"！</p>
+                    <p>Congratulations! You have completed the Chapter ${chapterNum} test, and Chapter ${nextChapterNum} is now unlocked!</p>
+                    <p>The prerequisite knowledge point "${getKnowledgeLabel(previousKnowledgeId)}" has been completed, now you can directly learn "${getKnowledgeLabel(targetKnowledgeId)}"!</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="continueLearningBtn" class="learn-btn">继续学习</button>
+                    <button id="continueLearningBtn" class="learn-btn">Continue Learning</button>
                 </div>
             </div>
         </div>
     `;
+
 
     document.body.insertAdjacentHTML('beforeend', modalHtml);
 
