@@ -212,7 +212,7 @@ function getTopicIdFromURL() {
 function updatePageTitle(topicId) {
     const headerTitle = document.querySelector('.header-title');
     if (headerTitle) {
-        headerTitle.textContent = `学习 - ${topicId}`;
+        headerTitle.textContent = `Study - ${topicId}`;
     }
 }
 
@@ -687,7 +687,7 @@ function initIframeEvents(iframe) {
         iframeLoadProcessed = true;
 
         console.log('预览框架已加载:', iframe.src);
-        showStatus('info', '预览页面已加载，选择器已就绪');
+        showStatus('info', 'The preview page is loaded and the selector is ready');
 
         // 初始化桥接
         setTimeout(() => {
@@ -1370,7 +1370,7 @@ function displaySelectedElementCode(elementInfo) {
         // 显示到代码面板
         codeContent.innerHTML = `
             <div class="code-header">
-                <h4>选中的元素代码</h4>
+                <h4>Selected element code</h4>
                 <div class="element-info">
                     <span class="tag-name" title="<${elementInfo.tagName}>">&lt;${elementInfo.tagName}&gt;</span>
                     ${elementInfo.id ? `<span class="element-id" title="ID: ${elementInfo.id}">#${elementInfo.id}</span>` : ''}
@@ -1741,12 +1741,12 @@ function showKnowledgeModal(knowledgeId, nodeLabel) {
     title.textContent = nodeLabel || knowledgeId;
     learnBtn.className = 'learn-btn';
     learnBtn.disabled = false;
-    learnBtn.textContent = '学习';
+    learnBtn.textContent = 'Study';
     testBtn.className = 'test-btn';
 
     if (graphState.learnedNodes.includes(knowledgeId)) {
-        status.textContent = '您已学过该知识点，是否再次复习或重新测试？';
-        learnBtn.textContent = '复习';
+        status.textContent = 'You have already learned this knowledge point. Do you want to review it again or take a retest?';
+        learnBtn.textContent = 'Review';
         learnBtn.className = 'review-btn';
 
         learnBtn.onclick = () => {
@@ -1757,8 +1757,8 @@ function showKnowledgeModal(knowledgeId, nodeLabel) {
             navigateTo('/pages/test_page.html', knowledgeId, true, true);
         };
     } else if (graphState.isKnowledgeUnlocked(knowledgeId)) {
-        status.textContent = '您可以开始学习该知识点或直接进行测试';
-        testBtn.textContent = '测试';
+        status.textContent = 'You can start learning this knowledge point or take the test directly';
+        testBtn.textContent = 'Test';
         testBtn.className = 'review-btn';
 
         learnBtn.onclick = () => {
@@ -1769,7 +1769,7 @@ function showKnowledgeModal(knowledgeId, nodeLabel) {
             navigateTo('/pages/test_page.html', knowledgeId, true, true);
         };
     } else {
-        status.textContent = '该知识点尚未解锁，您是否要直接开始测试？';
+        status.textContent = 'This knowledge point has not been unlocked yet. Do you want to start the test directly?';
         learnBtn.disabled = true;
         learnBtn.className += ' disabled';
 
@@ -1790,11 +1790,11 @@ function showKnowledgeModal_2(knowledgeId, previousChapterId, requiredChapter, n
     title.textContent = nodeLabel || knowledgeId;// 使用传入的nodeLabel或knowledgeId
     learnBtn.className = 'learn-btn';
     learnBtn.disabled = false;
-    learnBtn.textContent = '是';
-    testBtn.textContent = '否';
+    learnBtn.textContent = 'Yes';
+    testBtn.textContent = 'No';
     testBtn.className = 'test-btn';
 
-    status.textContent = `您还未完成前置章节"${requiredChapter}"的测试，需要先完成该章节的测试才能学习本知识点。是否现在开始测试前置章节？`;
+    status.textContent = `You have not yet completed the test for the prerequisite chapter "${requiredChapter}". You need to complete the test for that chapter before you can study this knowledge point. Do you want to start testing the prerequisite chapter now?`;
 
     learnBtn.onclick = () => {
         // 关键：记录跳跃学习的最终目标（比如 3_2）
@@ -1825,11 +1825,11 @@ function showKnowledgeModal_3(knowledgeId, lastTestId, requiredKnowledge, nodeLa
     title.textContent = nodeLabel || knowledgeId;// 使用传入的nodeLabel或knowledgeId
     learnBtn.className = 'learn-btn';
     learnBtn.disabled = false;
-    learnBtn.textContent = '是';
-    testBtn.textContent = '否';
+    learnBtn.textContent = 'Yes';
+    testBtn.textContent = 'No';
     testBtn.className = 'test-btn';
 
-    status.textContent = `您还未学习前置知识点"${requiredKnowledge}"，需要先完成该知识点的测试才能学习本知识点。是否现在开始测试前置知识点？`;
+    status.textContent = `You have not yet learned the prerequisite knowledge point "${requiredKnowledge}". You need to complete the test for that knowledge point before you can learn this knowledge point. Do you want to start the prerequisite knowledge point test now?`;
 
     learnBtn.onclick = () => {
         localStorage.setItem('jumpLearningTarget', JSON.stringify({
@@ -1856,14 +1856,14 @@ function showChapterModal(Id) {
 
     // 只显示章节号，去掉"_end"后缀
     const chapterNumber = Id.split('_')[0];
-    title.textContent = `第${chapterNumber}章`
+    title.textContent = `Chapter ${chapterNumber}`
     learnBtn.className = 'learn-btn';
     learnBtn.disabled = false;
-    learnBtn.textContent = '是';
-    testBtn.textContent = '否';
+    learnBtn.textContent = 'Yes';
+    testBtn.textContent = 'No';
     testBtn.className = 'test-btn';
 
-    status.textContent = `您已学过本章节，是否再次进行测试？`;
+    status.textContent = `You have studied this chapter. Do you want to take the test again?`;
 
     learnBtn.onclick = () => {
         navigateTo('/pages/test_page.html', Id, true, true);
@@ -1884,14 +1884,14 @@ function showChapterModal_2(Id) {
 
     // 只显示章节号，去掉"_end"后缀
     const chapterNumber = Id.split('_')[0];
-    title.textContent = `第${chapterNumber}章`;
+    title.textContent = `Chapter ${chapterNumber}`;
     learnBtn.className = 'learn-btn';
     learnBtn.disabled = false;
-    learnBtn.textContent = '是';
-    testBtn.textContent = '否';
+    learnBtn.textContent = 'Yes';
+    testBtn.textContent = 'No';
     testBtn.className = 'test-btn';
 
-    status.textContent = `您还未学完当前章节内容，是否直接开始测试？`;
+    status.textContent = `You haven't finished studying the current chapter yet. Do you want to start the test directly?`;
 
     learnBtn.onclick = () => {
         navigateTo('/pages/test_page.html', Id, true, true);
@@ -1912,14 +1912,14 @@ function showChapterModal_3(Id) {
 
     // 只显示章节号，去掉"_end"后缀
     const chapterNumber = Id.split('_')[0];
-    title.textContent = `第${chapterNumber}章`;
+    title.textContent = `Chapter ${chapterNumber}`;
     learnBtn.className = 'learn-btn';
     learnBtn.disabled = false;
-    learnBtn.textContent = '是';
-    testBtn.textContent = '否';
+    learnBtn.textContent = 'Yes';
+    testBtn.textContent = 'No';
     testBtn.className = 'test-btn';
 
-    status.textContent = `您还未解锁前置章节，是否直接开始测试？`;
+    status.textContent = `You haven't unlocked the pre-requisite chapters yet. Do you want to start the test directly?`;
 
     learnBtn.onclick = () => {
         navigateTo('/pages/test_page.html', Id, true, true);
@@ -1981,7 +1981,7 @@ function checkChapterPrerequisite(knowledgeId) {
             if (!completedChapters.includes(checkChapterId)) {
                 return {
                     requiresChapterCompletion: true,
-                    requiredChapter: `第${i}章`,
+                    requiredChapter: `Chapter ${i}`,
                     requiredChapterId: `${i}_end`,
                     lastTestId: `${i}_3` // 该章节的最后一个测试
                 };
