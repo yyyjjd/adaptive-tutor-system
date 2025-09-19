@@ -335,7 +335,7 @@ class ChatModule {
     this.isLoading = loading;
     if (this.sendButton) {
       this.sendButton.disabled = loading;
-      this.sendButton.textContent = loading ? '发送中...' : '提问';
+      this.sendButton.textContent = loading ? 'Sending...' : 'Send Message';
     }
     
     // 添加或移除加载指示器

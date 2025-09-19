@@ -631,7 +631,7 @@ function setupSubmitLogic() {
         console.log('提交时的编程行为分析:', behaviorAnalysis);
         const originalText = submitButton.textContent;
         submitButton.disabled = true;
-        submitButton.textContent = '批改中...';
+        submitButton.textContent = 'Correcting...';
 
 
         // 创建一个函数来恢复按钮状态
@@ -1182,8 +1182,8 @@ function showTestCompletionModal(currentTopicId, nextKnowledgeInfo) {
                     <p>You have completed the test and may now proceed to translation learning."${nextKnowledgeInfo.label}"</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="returnToGraphBtn" class="learn-btn">返回</button>
-                    <button id="continueLearningBtn" class="learn-btn">确认</button>
+                    <button id="returnToGraphBtn" class="learn-btn">Return</button>
+                    <button id="continueLearningBtn" class="learn-btn">Confirm</button>
                 </div>
             </div>
         </div>
@@ -1304,14 +1304,14 @@ function showChapterCompletionModal(completedChapter, nextChapterFirstKnowledge)
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:trophy" width="32" height="32" style="color: #FFD700;"></iconify-icon>
-                    <h2>章节完成！</h2>
+                    <h2>Chapter Completed!</h2>
                 </div>
                 <div class="modal-body">
-                    <p>您已完成测试，现在可以开始学习"${nextChapterFirstKnowledge.label}"</p>
+                    <p>You've completed the test and can now start studying"${nextChapterFirstKnowledge.label}"</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="returnToGraphBtn" class="learn-btn">返回</button>
-                    <button id="continueLearningBtn" class="learn-btn">确认</button>
+                    <button id="returnToGraphBtn" class="learn-btn">Return</button>
+                    <button id="continueLearningBtn" class="learn-btn">Confirm</button>
                 </div>
             </div>
         </div>
@@ -1625,16 +1625,16 @@ function showJumpLearningPrerequisiteModal(chapterNum, nextChapterNum, targetKno
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:check-circle" width="32" height="32" style="color: #4CAF50;"></iconify-icon>
-                    <h2>章节测试通过！</h2>
+                    <h2>Chapter test passed!</h2>
                 </div>
                 <div class="modal-body">
-                    <p>恭喜！您已完成第${chapterNum}章章节测试，第${nextChapterNum}章已解锁！</p>
-                    <p>要学习"${getKnowledgeLabel(targetKnowledgeId)}"，需要先完成"${getKnowledgeLabel(previousKnowledgeId)}"的测试。</p>
-                    <p>您希望：</p>
+                    <p>Congratulations! You have completed the chapter test for Chapter ${chapterNum} and Chapter ${nextChapterNum} has been unlocked!</p>
+                    <p>To learn "${getKnowledgeLabel(targetKnowledgeId)}", you need to complete the test of "${getKnowledgeLabel(previousKnowledgeId)}" first.</p>
+                    <p>You want to:</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="testPrerequisiteBtn" class="test-btn">测试前置知识点</button>
-                    <button id="returnGraphBtn" class="learn-btn">返回知识图谱</button>
+                    <button id="testPrerequisiteBtn" class="test-btn">Pre-test knowledge points</button>
+                    <button id="returnGraphBtn" class="learn-btn">Return to the knowledge graph</button>
                 </div>
             </div>
         </div>
@@ -1666,14 +1666,14 @@ function showJumpLearningNextChapterModal(chapterNum, nextChapterNum, nextChapte
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:check-circle" width="32" height="32" style="color: #4CAF50;"></iconify-icon>
-                    <h2>章节测试通过！</h2>
+                    <h2>Chapter test passed!</h2>
                 </div>
                 <div class="modal-body">
-                    <p>恭喜！您已完成第${chapterNum}章章节测试，第${nextChapterNum}章已解锁！</p>
-                    <p>现在可以学习"${getKnowledgeLabel(nextChapterFirstKnowledge)}"！</p>
+                    <p>Congratulations! You have completed the chapter test for Chapter ${chapterNum} and Chapter ${nextChapterNum} has been unlocked!</p>
+                    <p>Now you can learn "${getKnowledgeLabel(nextChapterFirstKnowledge)}"!</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="continueLearningBtn" class="learn-btn">继续学习</button>
+                    <button id="continueLearningBtn" class="learn-btn">Continue learning</button>
                 </div>
             </div>
         </div>
@@ -1852,16 +1852,16 @@ async function showJumpLearningChoiceModal(currentTopicId, returnUrl) {
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:help-circle" width="32" height="32" style="color: #ff9800;"></iconify-icon>
-                    <h2>测试未通过</h2>
+                    <h2>Test failed</h2>
                 </div>
                 <div class="modal-body">
-                    <p>您已经尝试了${failedSubmissionCount}次，仍未通过测试。</p>
-                    <p>建议您返回学习最近一个可以学习的知识点，巩固基础后再来挑战当前知识点。</p>
-                    <p>您希望：</p>
+                    <p>You have attempted ${failedSubmissionCount} times and still failed the test.</p>
+                    <p>It is recommended that you return to study the most recent knowledge point that you can learn, consolidate your basics, and then challenge the current knowledge point.</p>
+                    <p>You want to:</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="returnLearningBtn" class="learn-btn">返回学习</button>
-                    <button id="continueTestBtn" class="test-btn">继续尝试</button>
+                    <button id="returnLearningBtn" class="learn-btn">Return to study</button>
+                    <button id="continueTestBtn" class="test-btn">Keep trying</button>
                 </div>
             </div>
         </div>
@@ -1895,14 +1895,14 @@ async function showJumpLearningFailureModal(currentTopicId, returnUrl) {
             <div class="modal-content">
                 <div class="modal-header">
                     <iconify-icon icon="mdi:alert-circle" width="32" height="32" style="color: #f44336;"></iconify-icon>
-                    <h2>测试未通过</h2>
+                    <h2>Test failed</h2>
                 </div>
                 <div class="modal-body">
-                    <p>您已经尝试了${failedSubmissionCount}次，询问了${aiAskCount}次，仍未通过测试。</p>
-                    <p>建议您返回学习最近一个可以学习的知识点，巩固基础后再来挑战当前知识点。</p>
+                    <p>You have attempted ${failedSubmissionCount} times, asked ${aiAskCount} times, and still failed the test.</p>
+                    <p>It is recommended that you return to study the most recent knowledge point that you can learn, consolidate your basics, and then challenge the current knowledge point.</p>
                 </div>
                 <div class="modal-actions">
-                    <button id="returnLearningBtn" class="learn-btn">返回学习</button>
+                    <button id="returnLearningBtn" class="learn-btn">Return to study</button>
                 </div>
             </div>
         </div>
