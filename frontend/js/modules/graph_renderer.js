@@ -25,12 +25,12 @@ export class GraphRenderer {
             'text-halign': 'center',
             'color': '#1e293b',
             'background-color': '#f8fafc',
-            'width': 120,
-            'height': 120,
+            'width': 30,
+            'height': 30,
             'font-size': '14px',
             'font-family': 'Inter, sans-serif',
             'font-weight': '500',
-            'text-max-width': '100px',
+            'text-max-width': '190px',
             'shape': 'ellipse',
             'border-width': 2,
             'border-color': '#e2e8f0',
@@ -47,13 +47,21 @@ export class GraphRenderer {
           style: {
             'shape': 'roundrectangle',
             'font-weight': 'bold',
-            'width': 200,
-            'height': 80,
+            'width': 250,
+            'height': 100,
             'background-color': '#7aaef8',
             'color': '#1e293b',
             'border-width': 3,
             'border-color': '#3730a3',
             'font-size': '16px'
+          }
+        },
+        {
+          selector: 'node[type="knowledge"]',
+          style: {
+            'text-valign': 'bottom',
+            'text-halign': 'center',
+            'text-margin-y': '5px'
           }
         },
         {
@@ -92,8 +100,8 @@ export class GraphRenderer {
             'target-arrow-shape': 'triangle',
             'target-arrow-color': '#2563eb',
             'curve-style': 'unbundled-bezier',
-            'control-point-step-size': 80,
-            'control-point-distance': 60,
+            'control-point-step-size': 110,
+            'control-point-distance': 140,
             'control-point-weight': 0.4,
             'arrow-scale': 1.8,
             'line-style': 'solid',
@@ -468,13 +476,15 @@ addToolbarFunctionality() {
       : chapterPos.y - this.layoutParams.KNOWLEDGE_ROW_DELTA_Y;
 
     const n = kids.length;
-    const maxWidth = this.cy.container().clientWidth * 0.7;
-    const gap = Math.min(this.layoutParams.KNOWLEDGE_GAP_X, maxWidth / Math.max(n, 4));
+    const maxWidth = this.cy.container().clientWidth * 0.8;  // 增加可用宽度比例
+    // 当知识点数量较多时才使用动态计算，否则直接使用固定间距
+    const gap = n > 6 ? Math.min(this.layoutParams.KNOWLEDGE_GAP_X, maxWidth / Math.max(n, 4)) : this.layoutParams.KNOWLEDGE_GAP_X;
     const half = (n - 1) / 2;
-    const slopeStep = this.layoutParams.KNOWLEDGE_HEIGHT_STEP || 25;
+    const slopeStep = this.layoutParams.KNOWLEDGE_HEIGHT_STEP || 30;  // 增加默认倾斜步进值
 
     kids.forEach((id, i) => {
-      const x = chapterPos.x + (i - half) * gap;
+      // 向右移动30个单位
+      const x = chapterPos.x + (i - half) * gap + 30;
       // 给知识点加一个倾斜偏移
       const y = baseY + (i - half) * slopeStep * (isTop ? 1 : -1);
 
@@ -512,7 +522,7 @@ addToolbarFunctionality() {
         // 检测重叠
         const dx = Math.abs(pos1.x - pos2.x);
         const dy = Math.abs(pos1.y - pos2.y);
-        const minDistance = (width1 + width2) / 2 + 20;
+        const minDistance = (width1 + width2) / 2 + 30;  // 增加最小距离以适应更大的节点
         
         if (dx < minDistance && dy < minDistance) {
           // 轻微调整位置避免重叠
@@ -633,14 +643,14 @@ addToolbarFunctionality() {
     const chapterNodes = this.cy.nodes('[type="chapter"]');
     const containerWidth = this.cy.container().clientWidth;
 
-      // 增加间距系数，1.2表示比原来宽20%
-    const spacingFactor = 1.2;
+      // 增加间距系数，2.0表示比原来宽100%
+    const spacingFactor = 2.0;
     const baseSpacing = containerWidth / (chapterNodes.length + 1);
     const actualSpacing = baseSpacing * spacingFactor;
 
     chapterNodes.forEach((node, idx) => {
-      // 使用调整后的间距
-      const x = (idx + 1) * actualSpacing;
+      // 使用调整后的间距，并向右移动50个单位
+      const x = (idx + 1) * actualSpacing + 50;
       const isTop = idx % 2 === 0;  // 偶数序号放上排，奇数序号放下排
       const y = isTop 
         ? this.layoutParams.TOP_ROW_Y 

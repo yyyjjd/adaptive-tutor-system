@@ -224,6 +224,7 @@ export class MiniKnowledgeGraph {
             'font-size': '28px'
           }
         },
+        // 将状态类样式移到章节样式之后，确保优先级更高
         {
           selector: 'node.learned',
           style: {
@@ -247,6 +248,35 @@ export class MiniKnowledgeGraph {
         },
         {
           selector: 'node.current',
+          style: {
+            'background-color': '#f59e0b',
+            'border-color': '#d97706'
+          }
+        },
+        // 添加更具体的选择器，确保章节状态样式优先级最高
+        {
+          selector: 'node[type="chapter"].learned',
+          style: {
+            'background-color': '#10b981',
+            'border-color': '#059669'
+          }
+        },
+        {
+          selector: 'node[type="chapter"].unlocked',
+          style: {
+            'background-color': '#3b82f6',
+            'border-color': '#2563eb'
+          }
+        },
+        {
+          selector: 'node[type="chapter"].locked',
+          style: {
+            'background-color': '#9ca3af',
+            'border-color': '#6b7280'
+          }
+        },
+        {
+          selector: 'node[type="chapter"].current',
           style: {
             'background-color': '#f59e0b',
             'border-color': '#d97706'
