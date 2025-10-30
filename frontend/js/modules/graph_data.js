@@ -201,7 +201,7 @@ export class GraphState {
         canJump: false,
         reason: 'chapter_locked',
         requiredChapter: `chapter${chapter - 1}`,
-        requiredChapterName: `${chapter - 1}`
+        requiredChapterName: `第${chapter - 1}章`
       };
     }
 
